@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boss.soft.authorization.dao.OrderDao">
+    <select id="orderList" resultType="Order">
+    select orderid,status,startdate,employeeid,enddate from orderlist
+</select>
+    <select id="findById" resultType="Order">
+    select orderid,status,startdate,employeeid,enddate from orderlist
+    where employeeid=#{employeeId}
+</select>
+    <insert id="addOrder" useGeneratedKeys="true" keyProperty="orderId" parameterType="order">
+        insert into orderlist
+        (startdate,status,employeeid)
+        values
+        (#{startDate},#{status},#{employeeId})
+    </insert>
+</mapper>

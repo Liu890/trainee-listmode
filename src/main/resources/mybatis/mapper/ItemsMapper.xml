@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boss.soft.authorization.dao.ItemDao">
+    <select id="itemsList" resultType="OrderItems">
+    select id, orderid,goodsname,specificationmodel,quantity,location,datetime
+    from orderitems
+</select>
+
+    <select id="findById" resultType="OrderItems">
+    select id, orderid,goodsname,specificationmodel,quantity,location,datetime
+    from orderitems
+    where orderid=#{orderId}
+</select>
+    <insert id="addItems" parameterType="OrderItems">
+        insert into orderItems
+        (orderid,goodsname,specificationmodel,quantity,location,datetime)
+        values
+        (#{orderId},#{goodsName},#{specificationModel},#{quantity},#{location},#{dateTime})
+    </insert>
+</mapper>
