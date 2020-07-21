@@ -10,6 +10,7 @@ import com.example.demo.cart.service.impl.OrderItemsServiceImpl;
 import com.example.demo.cart.service.impl.OrderListServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,18 +28,23 @@ public class CartController {
     OrderItemsServiceImpl orderItemsService;
     @Autowired
     OrderListServiceImpl orderListService;
+    List<Cart> cartList = new ArrayList<>();
 
+    //将增加的order加入cart中
     @PostMapping(value = "/save",produces = "application/json;charset=utf-8")
-    public String save(@RequestBody Cart cart){
-        boolean eSave = employeeService.save(cart.getEmployee());
-        boolean oSave = orderListService.saveBatch(cart.getOrderList());
-        boolean iSave = orderItemsService.saveBatch(cart.getOrderItems());
-        if(eSave == true && oSave == true && iSave == true){
-            return JSON.toJSONString("success");
-        }else {
-            return JSON.toJSONString("false");
-        }
+    public String save(@RequestBody Cart cart, HttpSession session){
+        cartList.add(cart);
+        session.setAttribute("cart",cartList);
+        return JSON.toJSONString("success");
     }
+
+    @GetMapping(value = "/deleteAll")
+    public String deleteCart(HttpSession session){
+        session.removeAttribute("cartList");
+        cartList.clear();
+        return JSON.toJSONString("success");
+    }
+
     @GetMapping(value = "/delete")
     public String deleteById(List<Integer> ids){
         boolean removeOrder = orderListService.removeByIds(ids);
