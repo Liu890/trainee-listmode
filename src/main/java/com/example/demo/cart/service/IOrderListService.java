@@ -14,5 +14,13 @@ import java.util.List;
  */
 public interface IOrderListService extends IService<OrderList> {
 
+    /**
+     * <p>
+     *  根据员工编号查找对应的单子
+     * </p>
+     *
+     * @param employeeId
+     * @Return Result <List<OrderList>
+     */
     List<OrderList> findByEmployeeId(Integer employeeId);
 }

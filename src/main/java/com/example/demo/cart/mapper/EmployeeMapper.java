@@ -14,6 +14,7 @@ import java.util.List;
  * @author ljx
  * @since 2020-07-21
  */
+@SuppressWarnings("ALL")
 @Component
 public interface EmployeeMapper extends BaseMapper<Employee> {
 
@@ -23,7 +24,7 @@ public interface EmployeeMapper extends BaseMapper<Employee> {
      * </p>
      *
      * @param employeeId
-     * @Return <List<OrderItems>
+     * @Return Result <List<OrderList>
      */
     List<OrderList> findByEmployeeId(Integer employeeId);
 }

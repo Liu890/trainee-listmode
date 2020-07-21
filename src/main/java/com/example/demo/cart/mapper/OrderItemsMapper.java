@@ -21,9 +21,9 @@ public interface OrderItemsMapper extends BaseMapper<OrderItems> {
      * <p>
      *  找出单子具体的细节
      * </p>
-     *
+     * @date 2020-07-21
      * @param orderId
-     * @Return <List<OrderItems>
+     * @Return Result <List<OrderItems>
      */
     List<OrderItems> findByOrderId(Integer orderId);
 }
